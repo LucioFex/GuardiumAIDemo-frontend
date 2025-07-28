@@ -3,6 +3,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { importProvidersFrom } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { ResultsPanelComponent } from './components/results-panel/results-panel.component';
@@ -11,7 +12,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FileUploadComponent, ResultsPanelComponent],
+  imports: [CommonModule, FormsModule, FileUploadComponent, ResultsPanelComponent],
   template: `
     <div class="app-container">
       <!-- Header -->
@@ -42,10 +43,13 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
       <nav class="navbar">
         <div class="container">
           <div class="nav-content">
-            <div class="nav-item active">
-              <i class="bi bi-upload me-2"></i>
-              Análisis de CVs
-            </div>
+            <button 
+              class="btn guardium-toggle ms-auto"
+              [class.active]="guardiumEnabled"
+              (click)="toggleGuardium()">
+              <i class="bi bi-shield-check me-2"></i>
+              Guardium AI Security
+            </button>
           </div>
         </div>
       </nav>
@@ -68,7 +72,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
                   <app-file-upload 
                     #fileUpload
                     (fileSelected)="onFileSelected($event)"
-                    (analyzeRequest)="onAnalyzeRequest()">
+                    (analyzeRequest)="onAnalyzeRequest($event)">
                   </app-file-upload>
                 </div>
               </div>
@@ -117,13 +121,72 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
       <!-- Footer -->
       <footer class="footer">
         <div class="container">
-          <div class="text-center py-4">
-            <p class="mb-2">
-              <strong>ATS Analyzer</strong> - Sistema de Evaluación de CVs con IA
-            </p>
-            <small class="text-muted">
-              Powered by OpenAI GPT-4 • Angular 19 • Bootstrap 5
-            </small>
+          <div class="footer-content">
+            <!-- Main Footer Info -->
+            <div class="footer-main">
+              <div class="footer-brand">
+                <h4 class="footer-title">
+                  <i class="bi bi-person-check me-2"></i>
+                  ATS Analyzer
+                </h4>
+                <p class="footer-description">
+                  Sistema de Evaluación de CVs con Inteligencia Artificial
+                </p>
+              </div>
+              
+              <!-- Company Credits -->
+              <div class="footer-credits">
+                <h6 class="credits-title">Powered by</h6>
+                <div class="company-logos">
+                  <div class="company-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" 
+                         alt="IBM Logo" class="company-logo">
+                    <span class="company-name">IBM</span>
+                  </div>
+                  <div class="company-item">
+                    <img src="https://www.ibm.com/content/dam/connectedassets-adobe-cms/worldwide-content/other/ul/g/6f/guardium-icon.svg" 
+                         alt="IBM Guardium Logo" class="company-logo">
+                    <span class="company-name">IBM Guardium</span>
+                  </div>
+                  <div class="company-item">
+                    <div class="xelere-logo">X</div>
+                    <span class="company-name">Xelere</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Social Media -->
+              <div class="footer-social">
+                <h6 class="social-title">Síguenos</h6>
+                <div class="social-links">
+                  <a href="#" class="social-link" title="LinkedIn">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                  <a href="#" class="social-link" title="Twitter">
+                    <i class="bi bi-twitter-x"></i>
+                  </a>
+                  <a href="#" class="social-link" title="GitHub">
+                    <i class="bi bi-github"></i>
+                  </a>
+                  <a href="#" class="social-link" title="YouTube">
+                    <i class="bi bi-youtube"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+              <div class="footer-divider"></div>
+              <div class="footer-bottom-content">
+                <p class="copyright">
+                  © 2025 ATS Analyzer. Todos los derechos reservados.
+                </p>
+                <p class="tech-stack">
+                  Built with Angular 19 • Bootstrap 5 • OpenAI GPT-4
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
@@ -138,18 +201,51 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
 
     .header {
       background: white;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid #dee2e6;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .logo h2 {
-      color: var(--primary-color);
+      color: var(--forest-dark);
       font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .logo h2:hover {
+      color: var(--forest-darkest);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-outline-primary {
+      background: var(--lime-light);
+      color: var(--forest-dark);
+      border: 1px solid var(--forest-medium);
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-outline-primary:hover:not(:disabled) {
+      background: var(--forest-dark);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(49, 87, 44, 0.3);
+    }
+
+    .btn-outline-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .navbar {
-      background: var(--primary-color);
+      background: var(--forest-dark);
       padding: 0.75rem 0;
+      transition: background-color 0.3s ease;
     }
 
     .nav-content {
@@ -166,7 +262,41 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .nav-item.active {
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--sage-light);
+      color: var(--forest-dark);
+      font-weight: 600;
+    }
+
+    .guardium-toggle {
+      background: var(--lime-light);
+      color: var(--forest-dark);
+      border: 1px solid var(--lime-light);
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .guardium-toggle:hover {
+      background: var(--sage-light);
+      color: var(--forest-darkest);
+      border-color: var(--sage-light);
+      transform: translateY(-1px);
+    }
+
+    .guardium-toggle.active {
+      background: var(--sage-light);
+      color: #f7f7f7;
+      border-color: var(--sage-light);
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(144, 169, 85, 0.3);
+      animation: scaleIn 0.2s ease;
+    }
+
+    .guardium-toggle.active:hover {
+      background: var(--forest-medium);
+      color: white;
+      transform: translateY(-1px);
     }
 
     .main-content {
@@ -177,32 +307,38 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     .panel-card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 12px rgba(49, 87, 44, 0.1);
+      border: 1px solid var(--lime-light);
       height: 100%;
       display: flex;
       flex-direction: column;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeIn 0.6s ease;
     }
 
     .panel-card:hover {
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 4px 24px rgba(49, 87, 44, 0.15);
       transform: translateY(-2px);
+      border-color: var(--sage-light);
     }
 
     .panel-header {
       padding: 1.5rem 1.5rem 0;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--lime-light);
+      background: linear-gradient(135deg, var(--lime-light), rgba(236, 243, 158, 0.3));
       margin-bottom: 1.5rem;
+      border-radius: 12px 12px 0 0;
     }
 
     .panel-title {
-      color: var(--text-color);
+      color: var(--forest-darkest);
       font-weight: 600;
       margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
     }
 
     .panel-subtitle {
-      color: var(--muted-color);
+      color: var(--forest-dark);
       font-size: 0.875rem;
       margin: 0;
     }
@@ -215,15 +351,195 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .footer {
-      background: var(--text-color);
+      background: var(--forest-darkest);
       color: white;
       margin-top: auto;
+      padding: 3rem 0 1rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-title {
+      color: var(--lime-light);
+      font-weight: 700;
+      margin: 0;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-title:hover {
+      color: white;
+    }
+
+    .footer-description {
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .footer-credits {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .credits-title, .social-title {
+      color: var(--lime-light);
+      font-weight: 600;
+      margin: 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .company-logos {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .company-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .company-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .company-logo {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s ease;
+    }
+
+    .company-item:hover .company-logo {
+      filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(80deg);
+    }
+
+    .xelere-logo {
+      width: 24px;
+      height: 24px;
+      background: var(--lime-light);
+      color: var(--forest-darkest);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .company-item:hover .xelere-logo {
+      background: white;
+      transform: rotate(5deg);
+    }
+
+    .company-name {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .company-item:hover .company-name {
+      color: white;
+    }
+
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .social-link:hover {
+      background: var(--lime-light);
+      color: var(--forest-darkest);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 4px 12px rgba(236, 243, 158, 0.3);
+    }
+
+    .footer-bottom {
+      margin-top: 1rem;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .copyright {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .tech-stack {
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+      font-size: 0.85rem;
+      font-style: italic;
     }
 
     .alert {
       border: none;
       border-radius: 8px;
-      animation: fadeIn 0.5s ease;
+      animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .alert i {
@@ -238,6 +554,21 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
       .panel-card {
         margin-bottom: 1rem;
       }
+
+      .footer-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
     }
   `]
 })
@@ -245,6 +576,7 @@ export class App {
   selectedFile: File | null = null;
   analysisResults: ApiResponse | null = null;
   isLoading = false;
+  guardiumEnabled = false;
   statusMessage: { type: 'info' | 'success' | 'error', text: string } | null = null;
 
   constructor(private atsService: AtsApiService) {}
@@ -257,20 +589,20 @@ export class App {
     }
   }
 
-  async onAnalyzeRequest() {
-    if (!this.selectedFile) return;
+  async onAnalyzeRequest(data: {file: File, profession: string}) {
+    if (!data.file || !data.profession) return;
 
     this.isLoading = true;
     this.showStatusMessage('info', 'Procesando CV... Esto puede tomar unos segundos.');
 
     try {
       // Convert file to base64
-      const base64 = await this.fileToBase64(this.selectedFile);
+      const base64 = await this.fileToBase64(data.file);
       
       const request: ChatRequest = {
-        mensaje: "Analiza este CV y proporciona un feedback detallado sobre las fortalezas y debilidades del candidato.",
+        mensaje: `Dime si este candidato es un buen fit para la posición: ${data.profession}`,
         archivo_pdf_b64: base64,
-        GuardiumAI: true
+        GuardiumAI: this.guardiumEnabled
       };
 
       this.atsService.analyzeCV(request).subscribe({
@@ -306,6 +638,11 @@ export class App {
       next: () => {
         this.selectedFile = null;
         this.analysisResults = null;
+        // Reset file upload component
+        const fileUpload = document.querySelector('app-file-upload') as any;
+        if (fileUpload?.reset) {
+          fileUpload.reset();
+        }
         this.showStatusMessage('info', 'Sesión reiniciada. Puedes subir un nuevo CV.');
       },
       error: (error) => {
@@ -340,11 +677,16 @@ export class App {
   private clearStatusMessage() {
     this.statusMessage = null;
   }
+
+  toggleGuardium() {
+    this.guardiumEnabled = !this.guardiumEnabled;
+  }
 }
 
 bootstrapApplication(App, {
   providers: [
     importProvidersFrom(HttpClientModule),
+    importProvidersFrom(FormsModule),
     AtsApiService
   ]
 });

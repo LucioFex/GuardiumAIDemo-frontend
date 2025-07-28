@@ -1,12 +1,51 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-file-upload',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="upload-container">
+      <!-- Industry and Profession Selection -->
+      <div class="selection-section mb-4">
+        <div class="d-flex flex-column gap-3">
+          <div>
+            <label for="industry" class="form-label">
+              <i class="bi bi-building me-2"></i>Industria *
+            </label>
+            <select 
+              id="industry"
+              class="form-select"
+              [(ngModel)]="selectedIndustry"
+              (change)="onIndustryChange()"
+              required>
+              <option value="">Selecciona una industria</option>
+              <option *ngFor="let industry of industries" [value]="industry.key">
+                {{ industry.name }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <label for="profession" class="form-label">
+              <i class="bi bi-person-badge me-2"></i>Profesión *
+            </label>
+            <select 
+              id="profession"
+              class="form-select"
+              [(ngModel)]="selectedProfession"
+              [disabled]="!selectedIndustry"
+              required>
+              <option value="">Selecciona una profesión</option>
+              <option *ngFor="let profession of availableProfessions" [value]="profession">
+                {{ profession }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div 
         class="upload-area"
         [class.drag-over]="isDragOver"
@@ -47,7 +86,7 @@ import { CommonModule } from '@angular/common';
       
       <button 
         class="btn btn-primary btn-lg w-100 mt-3 analyze-btn"
-        [disabled]="!selectedFile || isAnalyzing"
+        [disabled]="!canAnalyze() || isAnalyzing"
         (click)="onAnalyze()">
         <span *ngIf="!isAnalyzing">
           <i class="bi bi-search"></i> Analizar CV
@@ -66,15 +105,60 @@ import { CommonModule } from '@angular/common';
       flex-direction: column;
     }
 
+    .selection-section {
+      background: linear-gradient(135deg, var(--lime-light), rgba(236, 243, 158, 0.5));
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid var(--sage-light);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeIn 0.6s ease;
+    }
+
+    .selection-section:hover {
+      box-shadow: 0 2px 8px rgba(144, 169, 85, 0.2);
+      transform: translateY(-1px);
+      border-color: var(--forest-medium);
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: var(--forest-darkest);
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .form-select {
+      background: white;
+      color: var(--forest-darkest);
+      border-radius: 6px;
+      border: 1px solid var(--sage-light);
+      padding: 0.75rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: slideDown 0.3s ease;
+    }
+
+    .form-select:focus {
+      border-color: var(--forest-dark);
+      box-shadow: 0 0 0 3px rgba(79, 119, 45, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .form-select:disabled {
+      background-color: rgba(236, 243, 158, 0.3);
+      color: var(--forest-medium);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
     .upload-area {
       flex: 1;
-      border: 2px dashed #cbd5e1;
+      border: 2px dashed var(--sage-light);
       border-radius: 12px;
       padding: 2rem;
       text-align: center;
       cursor: pointer;
-      transition: all 0.3s ease;
-      background: #f8fafc;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(236, 243, 158, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -82,26 +166,30 @@ import { CommonModule } from '@angular/common';
     }
 
     .upload-area:hover {
-      border-color: #2563eb;
-      background: #eff6ff;
+      border-color: var(--forest-dark);
+      background: rgba(236, 243, 158, 0.4);
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(144, 169, 85, 0.2);
     }
 
     .upload-area.drag-over {
-      border-color: #2563eb;
-      background: #dbeafe;
+      border-color: var(--forest-dark);
+      background: rgba(144, 169, 85, 0.4);
       transform: scale(1.02);
+      animation: pulse 0.6s ease-in-out;
     }
 
     .upload-area.has-file {
-      border-color: #16a34a;
-      background: #f0fdf4;
+      border-color: var(--forest-medium);
+      background: rgba(144, 169, 85, 0.3);
+      animation: scaleIn 0.3s ease;
     }
 
     .upload-icon i {
       font-size: 3rem;
-      color: #64748b;
+      color: var(--sage-light);
       margin-bottom: 1rem;
+      transition: color 0.3s ease;
     }
 
     .file-info {
@@ -109,6 +197,7 @@ import { CommonModule } from '@angular/common';
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
+      animation: fadeIn 0.5s ease;
     }
 
     .file-info i {
@@ -117,35 +206,102 @@ import { CommonModule } from '@angular/common';
 
     .file-name {
       font-weight: 600;
-      color: #1e293b;
+      color: var(--forest-darkest);
     }
 
     .file-size {
-      color: #64748b;
+      color: var(--forest-medium);
     }
 
     .upload-text {
-      color: #64748b;
+      color: var(--sage-light);
       margin: 0;
+      transition: color 0.3s ease;
     }
 
     .analyze-btn {
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #31572C !important;
+      color: white !important;
+      border: none !important;
+      font-weight: 600;
     }
 
     .analyze-btn:hover:not(:disabled) {
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      background: var(--forest-darkest) !important;
+      box-shadow: 0 4px 12px rgba(19, 42, 19, 0.4);
+    }
+
+    .analyze-btn:disabled {
+      transition: all 0.3s ease;
+      opacity: 0.6;
     }
   `]
 })
 export class FileUploadComponent {
   @Output() fileSelected = new EventEmitter<File>();
-  @Output() analyzeRequest = new EventEmitter<void>();
+  @Output() analyzeRequest = new EventEmitter<{file: File, profession: string}>();
 
   selectedFile: File | null = null;
+  selectedIndustry: string = '';
+  selectedProfession: string = '';
   isDragOver = false;
   isAnalyzing = false;
+
+  industries = [
+    { key: 'technology', name: 'Tecnología' },
+    { key: 'health', name: 'Salud' },
+    { key: 'business', name: 'Negocios y Finanzas' },
+    { key: 'arts', name: 'Arte y Comunicación' }
+  ];
+
+  professionsByIndustry: { [key: string]: string[] } = {
+    technology: [
+      'Desarrollador Backend',
+      'Especialista en Ciberseguridad',
+      'Frontend Developer',
+      'Data Engineer',
+      'DevOps Engineer',
+      'Arquitecto de Soluciones'
+    ],
+    health: [
+      'Médico Clínico',
+      'Enfermero/a',
+      'Psicólogo/a',
+      'Kinesiólogo/a',
+      'Técnico en Radiología',
+      'Bioquímico/a'
+    ],
+    business: [
+      'Analista Financiero',
+      'Contador Público',
+      'Auditor Externo',
+      'Asesor de Inversiones',
+      'Gerente de Producto',
+      'Analista de Riesgo Crediticio'
+    ],
+    arts: [
+      'Diseñador Gráfico',
+      'Periodista',
+      'Productor Audiovisual',
+      'Community Manager',
+      'Fotógrafo',
+      'Guionista'
+    ]
+  };
+
+  get availableProfessions(): string[] {
+    return this.selectedIndustry ? this.professionsByIndustry[this.selectedIndustry] || [] : [];
+  }
+
+  onIndustryChange() {
+    this.selectedProfession = '';
+  }
+
+  canAnalyze(): boolean {
+    return !!(this.selectedFile && this.selectedIndustry && this.selectedProfession);
+  }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -190,14 +346,24 @@ export class FileUploadComponent {
   }
 
   onAnalyze() {
-    if (this.selectedFile) {
+    if (this.canAnalyze()) {
       this.isAnalyzing = true;
-      this.analyzeRequest.emit();
+      this.analyzeRequest.emit({
+        file: this.selectedFile!,
+        profession: this.selectedProfession
+      });
     }
   }
 
   setAnalyzing(state: boolean) {
     this.isAnalyzing = state;
+  }
+
+  reset() {
+    this.selectedFile = null;
+    this.selectedIndustry = '';
+    this.selectedProfession = '';
+    this.isAnalyzing = false;
   }
 
   formatFileSize(bytes: number): string {
