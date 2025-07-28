@@ -22,7 +22,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
             <div class="logo">
               <h2 class="mb-0">
                 <i class="bi bi-person-check me-2"></i>
-                ATS Analyzer
+                Demo ATS Guardium AI Security
               </h2>
               <small class="text-muted">Evaluación Inteligente de CVs</small>
             </div>
@@ -127,7 +127,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
               <div class="footer-brand">
                 <h4 class="footer-title">
                   <i class="bi bi-person-check me-2"></i>
-                  ATS Analyzer
+                  Demo ATS Guardium AI Security
                 </h4>
                 <p class="footer-description">
                   Sistema de Evaluación de CVs con Inteligencia Artificial
@@ -144,7 +144,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
                     <span class="company-name">IBM</span>
                   </div>
                   <div class="company-item">
-                    <img src="https://www.ibm.com/content/dam/connectedassets-adobe-cms/worldwide-content/other/ul/g/6f/guardium-icon.svg" 
+                    <img src="/src/assets/image.png" 
                          alt="IBM Guardium Logo" class="company-logo">
                     <span class="company-name">IBM Guardium</span>
                   </div>
@@ -180,7 +180,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
               <div class="footer-divider"></div>
               <div class="footer-bottom-content">
                 <p class="copyright">
-                  © 2025 ATS Analyzer. Todos los derechos reservados.
+                  © 2025 Demo ATS Guardium AI Security. Licencia MIT.
                 </p>
                 <p class="tech-stack">
                   Built with Angular 19 • Bootstrap 5 • OpenAI GPT-4
