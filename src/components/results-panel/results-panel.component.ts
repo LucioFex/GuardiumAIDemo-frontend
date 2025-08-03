@@ -72,7 +72,7 @@ import { ApiResponse } from '../../services/ats-api.service';
 
     .empty-icon i {
       font-size: 4rem;
-      color: var(--lime-light);
+      color: #ff9999;
       margin-bottom: 1rem;
       transition: color 0.3s ease;
     }
@@ -82,14 +82,14 @@ import { ApiResponse } from '../../services/ats-api.service';
       padding: 1.5rem;
       background: white;
       border-radius: 12px;
-      border: 1px solid var(--lime-light);
+      border: 1px solid #e5e5e5;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       animation: fadeIn 0.6s ease;
     }
 
     .results-content:hover {
-      border-color: var(--sage-light);
-      box-shadow: 0 2px 8px rgba(144, 169, 85, 0.1);
+      border-color: var(--xelere-red-primary);
+      box-shadow: 0 2px 8px rgba(220, 68, 68, 0.15);
     }
 
     .status-badge-container {
@@ -114,21 +114,21 @@ import { ApiResponse } from '../../services/ats-api.service';
     }
 
     .status-approved {
-      background: rgba(79, 119, 45, 0.15);
-      color: var(--forest-medium);
-      border: 2px solid var(--forest-medium);
+      background: rgba(56, 161, 105, 0.15);
+      color: var(--success-color);
+      border: 2px solid var(--success-color);
     }
 
     .status-rejected {
-      background: rgba(188, 71, 73, 0.1);
-      color: var(--danger-color);
-      border: 2px solid var(--danger-color);
+      background: rgba(229, 62, 62, 0.1);
+      color: var(--xelere-red-primary);
+      border: 2px solid var(--xelere-red-primary);
     }
 
     .status-unknown {
-      background: rgba(144, 169, 85, 0.15);
-      color: var(--forest-medium);
-      border: 2px solid var(--sage-light);
+      background: rgba(214, 158, 46, 0.15);
+      color: var(--warning-color);
+      border: 2px solid var(--warning-color);
     }
 
     .status-text {
@@ -137,30 +137,30 @@ import { ApiResponse } from '../../services/ats-api.service';
     }
 
     .section-title {
-      color: var(--forest-dark);
+      color: var(--xelere-gray-dark);
       margin-bottom: 1rem;
       font-weight: 600;
       transition: color 0.3s ease;
     }
 
     .feedback-content {
-      background: linear-gradient(135deg, var(--lime-light), rgba(236, 243, 158, 0.5));
+      background: linear-gradient(135deg, #fff5f5, rgba(255, 229, 229, 0.6));
       border-radius: 8px;
       padding: 1.5rem;
-      border-left: 4px solid var(--forest-medium);
+      border-left: 4px solid var(--xelere-red-primary);
       line-height: 1.6;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       animation: fadeIn 0.8s ease;
     }
 
     .feedback-content:hover {
-      box-shadow: 0 2px 8px rgba(144, 169, 85, 0.2);
+      box-shadow: 0 2px 8px rgba(220, 68, 68, 0.25);
       transform: translateX(2px);
     }
 
     .feedback-content p {
       margin: 0;
-      color: var(--forest-darkest);
+      color: var(--xelere-black);
     }
 
     @keyframes scaleIn {

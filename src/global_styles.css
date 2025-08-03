@@ -3,27 +3,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary-color: #132A13;
-  --secondary-color: #31572C;
-  --success-color: #4F772D;
-  --danger-color: #BC4749;
-  --warning-color: #90A955;
-  --light-bg: #f8f9fa;
+  --primary-color: #DC4444;
+  --secondary-color: #B73333;
+  --success-color: #38A169;
+  --danger-color: #DC4444;
+  --warning-color: #D69E2E;
+  --light-bg: #ffffff;
   --white: #ffffff;
   --border-color: #dee2e6;
-  --text-color: #132A13;
-  --muted-color: #31572C;
-  --accent-color: #90A955;
-  --neutral-light: #ECF39E;
-  --neutral-dark: #4F772D;
+  --text-color: #1a1a1a;
+  --muted-color: #666666;
+  --accent-color: #DC4444;
+  --neutral-light: #ffffff;
+  --neutral-dark: #1a1a1a;
   --card-bg: #ffffff;
   
-  /* New palette from latest image */
-  --forest-darkest: #132A13;
-  --forest-dark: #31572C;
-  --forest-medium: #4F772D;
-  --sage-light: #90A955;
-  --lime-light: #ECF39E;
+  /* Xelere color palette */
+  --xelere-red-primary: #DC4444;
+  --xelere-red-secondary: #B73333;
+  --xelere-red-light: #FF6B6B;
+  --xelere-red-lighter: #FFE5E5;
+  --xelere-black: #1a1a1a;
+  --xelere-gray-dark: #2a2a2a;
+  --xelere-gray-medium: #666666;
+  --xelere-gray-light: #cccccc;
+  --xelere-gray-lighter: #ffffff;
 }
 
 * {
@@ -34,9 +38,9 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #d1e896;
+  background: #f8f9fa;
   min-height: 100vh;
-  color: var(--forest-darkest);
+  color: var(--xelere-black);
   line-height: 1.6;
 }
 
@@ -50,17 +54,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--lime-light);
+  background: #f8f9fa;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--forest-medium);
+  background: var(--xelere-red-primary);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--forest-dark);
+  background: var(--xelere-red-secondary);
 }
 
 /* Animations */
@@ -110,28 +114,28 @@ body {
 }
 
 .btn-primary {
-  background: var(--forest-dark);
+  background: var(--xelere-red-primary);
   color: white;
-  box-shadow: 0 2px 8px rgba(49, 87, 44, 0.2);
+  box-shadow: 0 2px 8px rgba(220, 68, 68, 0.25);
 }
 
 .btn-primary:hover {
-  background: var(--forest-darkest);
-  box-shadow: 0 4px 12px rgba(19, 42, 19, 0.3);
+  background: var(--xelere-red-secondary);
+  box-shadow: 0 4px 12px rgba(183, 51, 51, 0.35);
   transform: translateY(-1px);
 }
 
 /* Card styles */
 .card {
   border: none;
-  background: var(--sage-light);
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(19, 42, 19, 0.08);
+  box-shadow: 0 2px 12px rgba(26, 26, 26, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
-  box-shadow: 0 4px 24px rgba(19, 42, 19, 0.12);
+  box-shadow: 0 4px 24px rgba(26, 26, 26, 0.12);
   transform: translateY(-2px);
 }
 

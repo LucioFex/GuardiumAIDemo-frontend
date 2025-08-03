@@ -21,8 +21,8 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
           <div class="d-flex justify-content-between align-items-center py-3">
             <div class="logo">
               <h2 class="mb-0">
-                <i class="bi bi-person-check me-2"></i>
-                Demo ATS Guardium AI Security
+                <img src="https://xelere.com/wp-content/uploads/2015/09/Marca-Xelere-034-300x80.png" alt="Xelere" class="header-logo me-4">
+                ATS Guardium AI Security
               </h2>
               <small class="text-muted">Evaluación Inteligente de CVs</small>
             </div>
@@ -126,7 +126,8 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
             <div class="footer-main">
               <div class="footer-brand">
                 <h4 class="footer-title">
-                  <i class="bi bi-person-check me-2"></i>
+                  <!-- <i class="bi bi-person-check me-2"></i> -->
+                  <img src="assets/image%20copy.png" alt="Xelere" class="header-logo me-2">
                   Demo ATS Guardium AI Security
                 </h4>
                 <p class="footer-description">
@@ -201,18 +202,31 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
 
     .header {
       background: white;
-      border-bottom: 1px solid #dee2e6;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid #e5e5e5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .logo h2 {
-      color: var(--forest-dark);
+      color: var(--xelere-black);
       font-weight: 700;
       transition: color 0.3s ease;
     }
 
     .logo h2:hover {
-      color: var(--forest-darkest);
+      color: var(--xelere-red-primary);
+    }
+
+    .header-logo {
+      width: 60px;
+      height: auto;
+      object-fit: contain;
+      vertical-align: middle;
+      transition: all 0.3s ease;
+      max-height: 2.5rem;
+    }
+
+    .header-logo:hover {
+      transform: scale(1.1);
     }
 
     .header-actions {
@@ -221,9 +235,9 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .btn-outline-primary {
-      background: var(--lime-light);
-      color: var(--forest-dark);
-      border: 1px solid var(--forest-medium);
+      background: white;
+      color: var(--xelere-red-primary);
+      border: 1px solid var(--xelere-red-primary);
       font-size: 0.875rem;
       padding: 0.5rem 1rem;
       border-radius: 6px;
@@ -231,10 +245,10 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .btn-outline-primary:hover:not(:disabled) {
-      background: var(--forest-dark);
+      background: var(--xelere-red-primary);
       color: white;
       transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(49, 87, 44, 0.3);
+      box-shadow: 0 2px 8px rgba(220, 68, 68, 0.35);
     }
 
     .btn-outline-primary:disabled {
@@ -243,9 +257,10 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .navbar {
-      background: var(--forest-dark);
+      background: var(--xelere-black);
       padding: 0.75rem 0;
       transition: background-color 0.3s ease;
+      border-bottom: 2px solid var(--xelere-red-primary);
     }
 
     .nav-content {
@@ -262,15 +277,15 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .nav-item.active {
-      background: var(--sage-light);
-      color: var(--forest-dark);
+      background: var(--xelere-red-primary);
+      color: white;
       font-weight: 600;
     }
 
     .guardium-toggle {
-      background: var(--lime-light);
-      color: var(--forest-dark);
-      border: 1px solid var(--lime-light);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       font-size: 0.875rem;
       padding: 0.5rem 1rem;
       border-radius: 6px;
@@ -278,23 +293,23 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .guardium-toggle:hover {
-      background: var(--sage-light);
-      color: var(--forest-darkest);
-      border-color: var(--sage-light);
+      background: var(--xelere-red-primary);
+      color: white;
+      border-color: var(--xelere-red-primary);
       transform: translateY(-1px);
     }
 
     .guardium-toggle.active {
-      background: var(--sage-light);
-      color: #f7f7f7;
-      border-color: var(--sage-light);
+      background: var(--xelere-red-primary);
+      color: white;
+      border-color: var(--xelere-red-primary);
       font-weight: 600;
-      box-shadow: 0 2px 8px rgba(144, 169, 85, 0.3);
+      box-shadow: 0 2px 8px rgba(220, 68, 68, 0.35);
       animation: scaleIn 0.2s ease;
     }
 
     .guardium-toggle.active:hover {
-      background: var(--forest-medium);
+      background: var(--xelere-red-secondary);
       color: white;
       transform: translateY(-1px);
     }
@@ -307,8 +322,8 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     .panel-card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(49, 87, 44, 0.1);
-      border: 1px solid var(--lime-light);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e5e5;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -317,30 +332,31 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .panel-card:hover {
-      box-shadow: 0 4px 24px rgba(49, 87, 44, 0.15);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
-      border-color: var(--sage-light);
+      border-color: var(--xelere-red-primary);
     }
 
     .panel-header {
       padding: 1.5rem 1.5rem 0;
-      border-bottom: 1px solid var(--lime-light);
-      background: linear-gradient(135deg, var(--lime-light), rgba(236, 243, 158, 0.3));
+      border-bottom: 1px solid #e5e5e5;
+      background: linear-gradient(135deg, #fff5f5, rgba(255, 229, 229, 0.5));
       margin-bottom: 1.5rem;
       border-radius: 12px 12px 0 0;
     }
 
     .panel-title {
-      color: var(--forest-darkest);
+      color: var(--xelere-black);
       font-weight: 600;
       margin-bottom: 0.5rem;
       transition: color 0.3s ease;
     }
 
     .panel-subtitle {
-      color: var(--forest-dark);
+      color: var(--xelere-gray-dark);
       font-size: 0.875rem;
       margin: 0;
+      opacity: 0.8;
     }
 
     .panel-content {
@@ -351,7 +367,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .footer {
-      background: var(--forest-darkest);
+      background: var(--xelere-black);
       color: white;
       margin-top: auto;
       padding: 3rem 0 1rem;
@@ -377,7 +393,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .footer-title {
-      color: var(--lime-light);
+      color: var(--xelere-red-light);
       font-weight: 700;
       margin: 0;
       font-size: 1.5rem;
@@ -385,7 +401,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .footer-title:hover {
-      color: white;
+      color: var(--xelere-red-light);
     }
 
     .footer-description {
@@ -402,7 +418,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .credits-title, .social-title {
-      color: var(--lime-light);
+      color: #ff6b6b;
       font-weight: 600;
       margin: 0;
       font-size: 1rem;
@@ -440,14 +456,14 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .company-item:hover .company-logo {
-      filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(80deg);
+      filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(340deg);
     }
 
     .xelere-logo {
       width: 24px;
       height: 24px;
-      background: var(--lime-light);
-      color: var(--forest-darkest);
+      background: var(--xelere-red-primary);
+      color: white;
       border-radius: 4px;
       display: flex;
       align-items: center;
@@ -458,7 +474,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .company-item:hover .xelere-logo {
-      background: white;
+      background: #ff6b6b;
       transform: rotate(5deg);
     }
 
@@ -499,10 +515,10 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
     }
 
     .social-link:hover {
-      background: var(--lime-light);
-      color: var(--forest-darkest);
+      background: var(--xelere-red-primary);
+      color: white;
       transform: translateY(-3px) scale(1.1);
-      box-shadow: 0 4px 12px rgba(236, 243, 158, 0.3);
+      box-shadow: 0 4px 12px rgba(220, 68, 68, 0.35);
     }
 
     .footer-bottom {
