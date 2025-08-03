@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiResponse } from '../../services/ats-api.service';
+import { ApiResponse } from '../../../core/services/ats-api.service';
 
 @Component({
   selector: 'app-results-panel',
