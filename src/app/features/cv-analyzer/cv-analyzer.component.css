@@ -31,7 +31,7 @@
 }
 
 .xelere-logo {
-  width: 48px;
+  width: auto;
   height: 48px;
   background: var(--xelere-red-primary);
   color: white;
