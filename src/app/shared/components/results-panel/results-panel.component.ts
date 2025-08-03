@@ -21,12 +21,14 @@ import { ApiResponse } from '../../../core/services/ats-api.service';
           <div class="status-badge" [ngClass]="{
             'status-approved': results.aprobado === 'YES',
             'status-rejected': results.aprobado === 'NO',
-            'status-unknown': results.aprobado === 'Unknown'
+            'status-unknown': results.aprobado === 'Unknown',
+            'status-security-alert': results.aprobado === 'Prompt-Injection-Detected'
           }">
             <i class="bi" [ngClass]="{
               'bi-check-circle-fill': results.aprobado === 'YES',
               'bi-x-circle-fill': results.aprobado === 'NO',
-              'bi-question-circle-fill': results.aprobado === 'Unknown'
+              'bi-question-circle-fill': results.aprobado === 'Unknown',
+              'bi-shield-exclamation': results.aprobado === 'Prompt-Injection-Detected'
             }"></i>
             <span class="status-text">
               {{ getStatusText(results.aprobado) }}
@@ -62,6 +64,7 @@ export class ResultsPanelComponent {
       case 'YES': return 'Aprobado';
       case 'NO': return 'Rechazado';
       case 'Unknown': return 'Pendiente';
+      case 'Prompt-Injection-Detected': return 'Prompt Injection Detectado';
       default: return 'Desconocido';
     }
   }

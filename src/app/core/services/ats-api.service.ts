@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 export interface ApiResponse {
   respuesta: string;
-  aprobado: 'YES' | 'NO' | 'Unknown';
+  aprobado: 'YES' | 'NO' | 'Unknown' | 'Prompt-Injection-Detected';
 }
 
 export interface ChatRequest {
