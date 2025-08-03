@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { ViewChild } from '@angular/core';
 import { importProvidersFrom } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -570,25 +571,45 @@ import { AtsApiService, ApiResponse, ChatRequest } from './services/ats-api.serv
       .panel-card {
         margin-bottom: 1rem;
       }
-
+           // Reset the analyzing state in the file upload component
+           setTimeout(() => {
+             const fileUploadElement = document.querySelector('app-file-upload') as any;
+             if (fileUploadElement && fileUploadElement.setAnalyzing) {
+               fileUploadElement.setAnalyzing(false);
+             }
+           }, 100);
       .footer-main {
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
       }
-
+           // Reset the analyzing state in the file upload component
+           setTimeout(() => {
+             const fileUploadElement = document.querySelector('app-file-upload') as any;
+             if (fileUploadElement && fileUploadElement.setAnalyzing) {
+               fileUploadElement.setAnalyzing(false);
+             }
+           }, 100);
       .footer-bottom-content {
         flex-direction: column;
         text-align: center;
       }
 
       .social-links {
-        justify-content: center;
+       // Reset the analyzing state in the file upload component
+       setTimeout(() => {
+         const fileUploadElement = document.querySelector('app-file-upload') as any;
+         if (fileUploadElement && fileUploadElement.setAnalyzing) {
+           fileUploadElement.setAnalyzing(false);
+         }
+       }, 100);
       }
     }
   `]
 })
 export class App {
+  @ViewChild('fileUpload') fileUploadComponent!: FileUploadComponent;
+  
   selectedFile: File | null = null;
   analysisResults: ApiResponse | null = null;
   isLoading = false;
@@ -626,26 +647,20 @@ export class App {
           this.analysisResults = response;
           this.showStatusMessage('success', 'Análisis completado exitosamente.');
           this.isLoading = false;
-          // Clear file upload state
-          const fileUpload = document.querySelector('app-file-upload') as any;
-          if (fileUpload?.setAnalyzing) {
-            fileUpload.setAnalyzing(false);
-          }
+          this.fileUploadComponent.setAnalyzing(false);
         },
         error: (error) => {
           console.error('Error analyzing CV:', error);
           this.showStatusMessage('error', 'Error al conectar con el servidor. Asegúrate de que la API esté ejecutándose en http://localhost:5001');
           this.isLoading = false;
-          const fileUpload = document.querySelector('app-file-upload') as any;
-          if (fileUpload?.setAnalyzing) {
-            fileUpload.setAnalyzing(false);
-          }
+          this.fileUploadComponent.setAnalyzing(false);
         }
       });
     } catch (error) {
       console.error('Error processing file:', error);
       this.showStatusMessage('error', 'Error al procesar el archivo. Asegúrate de que sea un PDF válido.');
       this.isLoading = false;
+      this.fileUploadComponent.setAnalyzing(false);
     }
   }
 
@@ -697,6 +712,7 @@ export class App {
   toggleGuardium() {
     this.guardiumEnabled = !this.guardiumEnabled;
   }
+
 }
 
 bootstrapApplication(App, {
