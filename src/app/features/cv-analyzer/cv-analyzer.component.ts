@@ -18,7 +18,7 @@ import { AtsApiService, ApiResponse, ChatRequest } from '../../core/services/ats
           <div class="header-content">
             <div class="brand">
               <div class="logo">
-                <div class="xelere-logo">X</div>
+                <img class="xelere-logo" src="assets/xelere_dark.png">
               </div>
               <div class="brand-text">
                 <h1 class="brand-title">Demo ATS Guardium AI Security</h1>
@@ -119,13 +119,18 @@ import { AtsApiService, ApiResponse, ChatRequest } from '../../core/services/ats
                 <h5 class="credits-title">Desarrollado por</h5>
                 <div class="company-logos">
                   <div class="company-item">
-                    <div class="xelere-logo">X</div>
-                    <span class="company-name">Xelere</span>
+                    <span class="company-name">
+                      <img class="xelere-logo-footer" src="assets/xelere_dark.png">
+                    </span>
                   </div>
                   <div class="company-item">
-                    <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=24&h=24&fit=crop" 
-                         alt="IBM" class="company-logo">
-                    <span class="company-name">IBM</span>
+                    <span class="company-name">
+                      <img class="ibm-logo-footer" src="assets/ibm_dark.png">
+                    </span>
+                  </div>
+                  <div class="company-item">
+                    <img class="guardium-logo-footer" src="assets/guardium.png">
+                    <span class="company-name">IBM Guardium AI Security</span>
                   </div>
                 </div>
               </div>
