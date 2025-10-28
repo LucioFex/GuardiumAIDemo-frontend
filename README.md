@@ -16,7 +16,7 @@ UI en **Angular 20** para la demo de *ATS + Guardium for AI*: subís un **CV (PD
 - **Panel derecho**: Resultados del Análisis con estado (p. ej. *APROBADO*) y feedback detallado.
 - 🛡 **Botón Guardium AI**: Este botón activa el proxy que intercepta el input/output mediante la solución IBM Guardium IA Security.
 
-<img width="450" height="auto" alt="ats_guardium" src="https://github.com/user-attachments/assets/83e8e3a5-28f8-4c7e-b3c3-e481daf4286f" />
+<img width="550" height="auto" alt="ats_guardium" src="https://github.com/user-attachments/assets/83e8e3a5-28f8-4c7e-b3c3-e481daf4286f" />
 <img width="550" height="auto" alt="ats_guardium_demo" src="https://github.com/user-attachments/assets/2645e4dc-4273-4d6b-a86a-99609d15aed0" />
 
 
