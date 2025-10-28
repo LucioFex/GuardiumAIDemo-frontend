@@ -33,3 +33,7 @@ git clone https://github.com/LucioFex/GuardiumAIDemo-frontend.git
 cd GuardiumAIDemo-frontend
 npm install
 ```
+
+---
+
+<img width="250" height="auto" alt="logo xelerewhite-02 (2)" src="https://github.com/user-attachments/assets/1fc4f49e-006c-4c0d-b532-7a732486936b" />
